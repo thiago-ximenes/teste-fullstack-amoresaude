@@ -16,13 +16,13 @@ Requisitos obrigatórios
 - Fizesse uso da estratégia de change detection OnPush [⇗](https://angular.io/guide/change-detection-skipping-subtrees#skipping-component-subtrees)
 - Fizesse uso dos operadores do RXJS [⇗](https://rxjs.dev/api)
 
-O mock das telas pode ser visto atraves do Excalidraw
+O mock das telas pode ser visto através de uma cena pronta do [Excalidraw](https://drive.google.com/file/d/1oz3gPyf-lODarqtMcWDPv5yXx5wfekA1/view?usp=sharing). Voce deve acessar `https://excalidraw.com/` e abrir o arquivo `embed_scente_amorsaude_front.excalidraw (2).svg`. Qualquer problema, favor entrar em contato.
 
 > Dica:<br /> 
 > Lembre-se que no final do dia você sempre estará escrevendo código para outros desenvolvedores.<br />
 > Deixe as mágicas para Merlin e as variáveis x,y,z para o webpack 😂
 
----
+----
 
 ### [Login] História de usuário
 
@@ -46,6 +46,8 @@ O mock das telas pode ser visto atraves do Excalidraw
 - O campo de input possuir um ícone para mostrar ou esconder a senha.
 - O usuário possa permanecer na aplicação sem precisar se autenticar ate o refresh_token expirar.
 - O usuário fosse autenticado somente quando o formulário for válido.
+
+----
 
 ### [CRUD] Listagem - História de usuário
 
@@ -71,6 +73,8 @@ O mock das telas pode ser visto atraves do Excalidraw
 - Ao filtrar os dados na tabela, a query fosse salva na URL. E caso o usuário queira compartilhar o link da sua busca posteriormente o componente de listagem conseguisse montar o resultado da busca apenas pela URL.
 - A tabela pudesse ser ordenada por coluna seja localmente ou via requisição para o servidor.
 - O campo de busca tivesse um ícone para limpar a busca atual é só aparecesse quando existisse query
+
+----
 
 ### [CRUD] Create/Edit - História de usuário
 
@@ -124,6 +128,8 @@ Especialidades medicas atendidas ⇒ select multiplo
 - O campo CNPJ tivesse um validador de CNPJ e tamanho maximo
 - O campos de combobox fossem carregados de maneira assíncrona separados do endpoint principal
 - O campo de especialidades seja obrigatório que tenha pelo menos 5 selecionadas
+
+----
 
 ### [CRUD] Visualização - História de usuário
 
