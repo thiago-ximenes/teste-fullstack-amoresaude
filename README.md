@@ -143,4 +143,16 @@ Especialidades medicas atendidas ⇒ select multiplo
 - O usuário pudesse interagir com a tela somente quando todos os dados estivessem carregados
 - Caso tenha 5 ou mais especialidades exibir um ícone de **+** e abrir um modal com as demais especialidades associadas aquela clínica
 
+## Back-end
+**Ferramentas**
+- Nest Js
+- Typeorm
+
+Criar as tabelas com relacionamentos, login, estrutura de pastas, tratamento de erros, filtros com padrão DTO nos endpoinst.
+Seriá ótimo ter um Dockerfile e um Dockercompose.
+Se possível usar um banco SQL já no Docker, mas também poderá usar um Sqlite.
+
+#Boa sorte.
+
+
 
