@@ -1,4 +1,4 @@
-import {IsDefined, IsEmail, IsString, Length} from "class-validator";
+import {IsDefined, IsEmail, IsString} from "class-validator";
 
 export class CreateUserDto {
     @IsDefined()
@@ -7,7 +7,6 @@ export class CreateUserDto {
 
     @IsDefined()
     @IsString()
-    @Length(8)
     password: string;
 
     @IsDefined()
