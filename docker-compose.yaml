@@ -38,21 +38,22 @@ services:
       - mynet
     depends_on:
       - mysql
-#
-#
-#  frontend:
-#    build: ./frontend
-#    container_name: frontend
-#    restart: unless-stopped
-#env_file: .env
-#    ports:
-#      - "3001:3001"
-#    volumes:
-#      - ./frontend:/app
-#    networks:
-#      - mynet
-#    depends_on:
-#      - backend
+
+
+  frontend:
+    build: ./frontend
+    container_name: frontend
+    restart: unless-stopped
+    env_file: .env
+    ports:
+      - "3001:4200"
+    volumes:
+      - ./frontend:/app
+    networks:
+      - mynet
+    depends_on:
+      - backend
+    command: npm run start -- --host 0.0.0.0
 
 networks:
   mynet:
