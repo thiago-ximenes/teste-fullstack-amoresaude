@@ -2,6 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {FormControl, FormGroup, Validators} from "@angular/forms";
 import {AuthService} from "../auth/auth.service";
 import {BehaviorSubject} from "rxjs";
+import {Router} from "@angular/router";
 
 @Component({
   selector: 'app-login',
@@ -20,7 +21,8 @@ export class LoginComponent implements OnInit {
   }
 
   constructor(
-    private readonly authService: AuthService
+    private readonly authService: AuthService,
+    private readonly router: Router
   ) {
     this.loginForm = new FormGroup({
       email: new FormControl('', [Validators.required, Validators.email]),
@@ -50,6 +52,8 @@ export class LoginComponent implements OnInit {
         this.loading.next(false);
 
         this.formSubmitted = false;
+
+        this.router.navigate(['/home']);
       },
       error: () => {
         this.loading.next(false);
