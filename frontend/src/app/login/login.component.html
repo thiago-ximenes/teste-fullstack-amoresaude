@@ -1,13 +1,56 @@
-<form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
-  <mat-form-field>
-    <mat-label>Email</mat-label>
-    <input matInput formControlName="email" type="email">
-  </mat-form-field>
+<form
+  [formGroup]="loginForm"
+  (ngSubmit)="onSubmit()"
+  class="max-w-lg mx-auto h-screen flex flex-col justify-center"
+>
+  <mat-card>
+    <div class="p-4">
+      <mat-card-title>Login</mat-card-title>
+      <mat-card-content>
+          <mat-error class="pt-5" *ngIf="hasFormError">
 
-  <mat-form-field>
-    <mat-label>Password</mat-label>
-    <input matInput formControlName="password" type="password">
-  </mat-form-field>
+            Dados incorretos. Por favor, revise seus dados
+            e tente novamente.
+          </mat-error>
+        <mat-error class="pt-5" *ngIf="hasCredentialsError">
 
-  <button mat-raised-button color="primary" type="submit">Login</button>
+          Senha ou usuário incorretos, revise suas credenciais!
+        </mat-error>
+        <div class="grid gap-6">
+
+          <mat-form-field>
+            <mat-label>E-mail</mat-label>
+            <input matInput formControlName="email" type="email">
+            <mat-error *ngIf="hasRequiredEmailError">
+              Por favor, digite seu usuário (e-mail de cadastro)!
+            </mat-error>
+            <mat-error *ngIf="hasInvalidEmailError">
+              Digite um e-mail válido
+            </mat-error>
+          </mat-form-field>
+
+          <mat-form-field>
+            <mat-label>Password</mat-label>
+            <input matInput formControlName="password" [type]="hide ? 'password' : 'text'">
+            <mat-icon matSuffix class="cursor-pointer" (click)="togglePasswordVisibility()">
+              {{hide ? 'visibility_off' : 'visibility'}}
+            </mat-icon>
+            <mat-error *ngIf="hasRequiredPasswordError">
+              Digite uma senha
+            </mat-error>
+          </mat-form-field>
+
+          <button
+            mat-raised-button
+            color="primary"
+            type="submit"
+            [disabled]="!!(loading | async)"
+          >
+            <span *ngIf="loading | async">Carragando...</span>
+            <span *ngIf="!(loading | async)">Entrar</span>
+          </button>
+        </div>
+      </mat-card-content>
+    </div>
+  </mat-card>
 </form>
