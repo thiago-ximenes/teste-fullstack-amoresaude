@@ -1,7 +1,7 @@
 import {NgModule} from '@angular/core';
 import {RouterModule, Routes} from '@angular/router';
-import {AuthGuard} from "./auth/auth.guard";
-import {GuestGuard} from "./guest/guest.guard";
+import {AuthGuard} from "./guards/auth/auth.guard";
+import {GuestGuard} from "./guards/guest/guest.guard";
 
 const routes: Routes = [
 
@@ -16,7 +16,7 @@ const routes: Routes = [
     children: [
       {
         path: 'home',
-        loadChildren: () => import('./home/home.module').then(m => m.HomeModule),
+        loadChildren: () => import('./pages/home/home.module').then(m => m.HomeModule),
       },
     ]
   },
@@ -26,7 +26,7 @@ const routes: Routes = [
     children: [
       {
         path: 'login',
-        loadChildren: () => import('./login/login.module').then(m => m.LoginModule)
+        loadChildren: () => import('./pages/login/login.module').then(m => m.LoginModule)
       },
     ]
   },

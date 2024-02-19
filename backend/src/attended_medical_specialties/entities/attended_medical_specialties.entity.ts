@@ -1,4 +1,11 @@
-import {Column, Entity as EntityORM, ManyToMany, PrimaryGeneratedColumn} from "typeorm";
+import {
+    Column,
+    CreateDateColumn,
+    Entity as EntityORM,
+    ManyToMany,
+    PrimaryGeneratedColumn,
+    UpdateDateColumn
+} from "typeorm";
 import {Entity} from "../../entities/entities/entity.entity";
 
 @EntityORM()
@@ -11,4 +18,11 @@ export class AttendedMedicalSpecialties {
 
     @ManyToMany(() => Entity, entity => entity.attended_medical_specialties)
     entities: Entity[];
+
+    @CreateDateColumn()
+    createdAt: Date;
+
+    @UpdateDateColumn()
+    updatedAt: Date;
+
 }

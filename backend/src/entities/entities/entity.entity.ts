@@ -1,11 +1,11 @@
 import {
-    Column,
+    Column, CreateDateColumn,
     Entity as EntityORM,
     JoinTable,
     ManyToMany,
     ManyToOne,
     OneToMany,
-    PrimaryGeneratedColumn
+    PrimaryGeneratedColumn, UpdateDateColumn
 } from 'typeorm';
 import {Regional} from "../../regionals/entities/regional.entity";
 import {
@@ -38,4 +38,10 @@ export class Entity {
     @ManyToMany(() => AttendedMedicalSpecialties, attended_medical_specialties => attended_medical_specialties)
     @JoinTable()
     attended_medical_specialties: AttendedMedicalSpecialties[];
+
+    @CreateDateColumn()
+    createdAt: Date;
+
+    @UpdateDateColumn()
+    updatedAt: Date;
 }

@@ -1,0 +1,72 @@
+<main class="grid grid-rows-2 p-6 items-end">
+  <section class="grid grid-cols-2 gap-6 h-fit ">
+    <h1 class="text-4xl font-bold text-center self-center">Entidades</h1>
+    <mat-button-toggle class="bg-indigo-300 md:w-1/3 mx-auto">
+      Nova entidade
+    </mat-button-toggle>
+  </section>
+  <section class="pt-6">
+    <mat-card>
+      <mat-card-content>
+        <mat-form-field class="w-full" appearance="outline">
+          <input matInput [(ngModel)]="filterValue">
+          <mat-icon *ngIf="!filterValue" matPrefix class="mr-3">search</mat-icon>
+          <button *ngIf="filterValue" matSuffix mat-icon-button aria-label="Clear" (click)="filterValue=''">
+            <mat-icon>close</mat-icon>
+          </button>
+        </mat-form-field>
+        <table mat-table [dataSource]="dataSource" class="w-full">
+          <ng-container matColumnDef="nome">
+            <mat-header-cell *matHeaderCellDef> Nome</mat-header-cell>
+            <mat-cell *matCellDef="let element"> {{ element.corporateName }}</mat-cell>
+          </ng-container>
+
+          <ng-container matColumnDef="região">
+            <mat-header-cell *matHeaderCellDef> Região</mat-header-cell>
+            <mat-cell *matCellDef="let element"> {{ element.tradeName }}</mat-cell>
+          </ng-container>
+
+          <ng-container matColumnDef="especialidades">
+            <mat-header-cell *matHeaderCellDef> Especialidades</mat-header-cell>
+            <mat-cell *matCellDef="let element">
+              {{ formatSpecialties(element.attended_medical_specialties) }}
+            </mat-cell>
+          </ng-container>
+
+          <ng-container matColumnDef="ativa">
+            <mat-header-cell *matHeaderCellDef> Ativa</mat-header-cell>
+            <mat-cell *matCellDef="let element"> {{ element.active ? 'Sim' : 'Não' }}</mat-cell>
+          </ng-container>
+          <ng-container matColumnDef="actions">
+            <mat-header-cell *matHeaderCellDef> Ações</mat-header-cell>
+            <mat-cell *matCellDef>
+              <button mat-icon-button>
+                <mat-icon>visibility</mat-icon>
+              </button>
+              <button mat-icon-button>
+                <mat-icon>edit</mat-icon>
+              </button>
+            </mat-cell>
+          </ng-container>
+
+          <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+          <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+
+
+          <tr class="mat-row text-center" *matNoDataRow>
+            <td class="mat-cell" colspan="4">
+              <mat-icon class="py-4">sentiment_dissatisfied</mat-icon>
+              <br/>
+              <div class="p-4">Não foram encontrados resultados</div>
+            </td>
+          </tr>
+        </table>
+
+        <mat-paginator
+          [length]="60"
+          [pageSize]="30"
+        ></mat-paginator>
+      </mat-card-content>
+    </mat-card>
+  </section>
+</main>

@@ -1,5 +1,4 @@
-import {Column, Entity as EntityORM, ManyToOne, PrimaryGeneratedColumn} from "typeorm";
-import {Entity} from "../../entities/entities/entity.entity";
+import {Column, CreateDateColumn, Entity as EntityORM, PrimaryGeneratedColumn, UpdateDateColumn} from "typeorm";
 
 @EntityORM()
 export class Regional {
@@ -8,4 +7,10 @@ export class Regional {
 
     @Column()
     label: string;
+
+    @CreateDateColumn()
+    createdAt: Date;
+
+    @UpdateDateColumn()
+    updatedAt: Date;
 }

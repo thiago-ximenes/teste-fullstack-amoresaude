@@ -5,12 +5,14 @@ import {AppRoutingModule} from './app-routing.module';
 import {AppComponent} from './app.component';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {NgxsModule} from "@ngxs/store";
-import {AuthState} from "./auth/auth.state";
+import {AuthState} from "./guards/auth/auth.state";
 import {HttpClientModule} from "@angular/common/http";
+import { MutableEntityComponent } from './pages/mutable-entity/mutable-entity.component';
 
 @NgModule({
   declarations: [
     AppComponent,
+    MutableEntityComponent,
   ],
   imports: [
     BrowserModule,

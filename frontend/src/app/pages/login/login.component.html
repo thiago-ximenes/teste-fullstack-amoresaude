@@ -16,9 +16,9 @@
 
           Senha ou usuário incorretos, revise suas credenciais!
         </mat-error>
-        <div class="grid gap-6">
+        <div class="grid gap-4">
 
-          <mat-form-field>
+          <mat-form-field appearance="outline">
             <mat-label>E-mail</mat-label>
             <input matInput formControlName="email" type="email">
             <mat-error *ngIf="hasRequiredEmailError">
@@ -29,7 +29,7 @@
             </mat-error>
           </mat-form-field>
 
-          <mat-form-field>
+          <mat-form-field appearance="outline">
             <mat-label>Password</mat-label>
             <input matInput formControlName="password" [type]="hide ? 'password' : 'text'">
             <mat-icon matSuffix class="cursor-pointer" (click)="togglePasswordVisibility()">
