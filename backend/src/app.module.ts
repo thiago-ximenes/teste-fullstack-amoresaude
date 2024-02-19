@@ -9,7 +9,13 @@ import databaseConfig from "./config/database.config";
 import {User} from "./users/entities/user.entity";
 import jwtConfig from "./config/jwt.config";
 import {AuthGuard} from "./auth/auth.guard";
+import { EntitiesModule } from './entities/entities.module';
+import { RegionalsModule } from './regionals/regionals.module';
+import { AttendedMedicalSpecialtiesModule } from './attended_medical_specialties/attended_medical_specialties.module';
 import authConstants from "./auth/auth.constants";
+import {Entity} from "./entities/entities/entity.entity";
+import {Regional} from "./regionals/entities/regional.entity";
+import {AttendedMedicalSpecialties} from "./attended_medical_specialties/entities/attended_medical_specialties.entity";
 
 @Module({
     imports: [
@@ -23,7 +29,10 @@ import authConstants from "./auth/auth.constants";
             useFactory: (_configService: ConfigService) => ({
                 type: 'mysql',
                 entities: [
-                    User
+                    User,
+                    Entity,
+                    Regional,
+                    AttendedMedicalSpecialties,
                 ],
                 database: _configService.get('database.database')!,
                 host: _configService.get('database.host'),
@@ -37,6 +46,9 @@ import authConstants from "./auth/auth.constants";
         }),
         AuthModule,
         UsersModule,
+        EntitiesModule,
+        RegionalsModule,
+        AttendedMedicalSpecialtiesModule,
     ],
     controllers: [AppController],
     providers: [

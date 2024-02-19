@@ -4,6 +4,7 @@ import * as bcrypt from 'bcryptjs';
 import {AuthExceptions} from "./auth.exceptions";
 import {JwtService} from "@nestjs/jwt";
 import {LoginDto} from "./dto/login.dto";
+import {User} from "../users/entities/user.entity";
 
 @Injectable()
 export class AuthService {
@@ -26,10 +27,14 @@ export class AuthService {
             throw AuthExceptions.invalidCredentials()
         }
 
-        const token =  this.jwtService.sign({sub: user.id, email: user.email});
+        const token = this.jwtService.sign({...user, password: undefined});
 
         return {
             access_token: token
         }
+    }
+
+    me = async (user: User) => {
+        return user;
     }
 }
