@@ -4,8 +4,12 @@ import {LoginDto} from "./dto/login.dto";
 import {Public} from "../decorators/Public";
 import {User} from "../decorators/User";
 import {User as UserEntity} from '../users/entities/user.entity'
+import {ApiBearerAuth, ApiTags} from "@nestjs/swagger";
 
-@Controller('auth')
+const routeName = 'auth'
+
+@ApiTags(routeName)
+@Controller(routeName)
 export class AuthController {
     constructor(
         private readonly authService: AuthService,
@@ -19,6 +23,7 @@ export class AuthController {
         return this.authService.signIn(loginDto);
     }
 
+    @ApiBearerAuth()
     @HttpCode(HttpStatus.OK)
     @Get('me')
     me(@User() user: UserEntity): Promise<UserEntity> {

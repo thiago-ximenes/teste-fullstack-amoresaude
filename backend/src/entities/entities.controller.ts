@@ -1,9 +1,15 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete } from '@nestjs/common';
-import { EntitiesService } from './entities.service';
-import { CreateEntityDto } from './dto/create-entity.dto';
-import { UpdateEntityDto } from './dto/update-entity.dto';
+import {Body, Controller, Delete, Get, Param, Patch, Post} from '@nestjs/common';
+import {EntitiesService} from './entities.service';
+import {CreateEntityDto} from './dto/create-entity.dto';
+import {UpdateEntityDto} from './dto/update-entity.dto';
+import {ApiBearerAuth, ApiTags} from "@nestjs/swagger";
 
-@Controller('entities')
+const routeName = 'entities'
+
+
+@ApiBearerAuth()
+@ApiTags(routeName)
+@Controller(routeName)
 export class EntitiesController {
   constructor(private readonly entitiesService: EntitiesService) {}
 
