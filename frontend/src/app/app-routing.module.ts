@@ -18,6 +18,18 @@ const routes: Routes = [
         path: 'home',
         loadChildren: () => import('./pages/home/home.module').then(m => m.HomeModule),
       },
+      {
+        path: 'entity/new',
+        loadChildren: () => import('./pages/mutable-entity/mutable-entity.module').then(m => m.MutableEntityModule),
+      },
+      {
+        path: 'entity/edit/:id',
+        loadChildren: () => import('./pages/mutable-entity/mutable-entity.module').then(m => m.MutableEntityModule),
+      },
+      {
+        path: 'entity/view/:id',
+        loadChildren: () => import('./pages/view-entity/view-entity.module').then(m => m.ViewEntityModule),
+      }
     ]
   },
   {

@@ -2,6 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {MatTableDataSource} from "@angular/material/table";
 import Entity from "../../../interfaces/entity.interface";
 import AttendedMedicalSpecialties from "../../../interfaces/attended_medical_specialties.interface";
+import {Router} from "@angular/router";
 
 const ELEMENT_DATA: Entity[] = [
   {
@@ -41,16 +42,16 @@ const ELEMENT_DATA: Entity[] = [
   templateUrl: './home.component.html',
 })
 export class HomeComponent implements OnInit {
-  filterValue = '';
+  constructor(
+    private readonly router: Router,
+  ) {
+  }
 
-  resultsLength = 15;
+  filterValue = '';
 
   displayedColumns: string[] = ['nome', 'região', 'especialidades', 'ativa', 'actions'];
 
   dataSource = new MatTableDataSource<Entity>(ELEMENT_DATA);
-
-  constructor() {
-  }
 
   ngOnInit(): void {
   }
@@ -65,5 +66,17 @@ export class HomeComponent implements OnInit {
     } else {
       return '';
     }
+  }
+
+  navigateToNewEntity() {
+    this.router.navigate(['entity/new']);
+  }
+
+  navigateToEditEntity(id: number) {
+    this.router.navigate(['entity/edit', id]);
+  }
+
+  navigateToViewEntity(id: number) {
+    this.router.navigate(['entity/view', id]);
   }
 }

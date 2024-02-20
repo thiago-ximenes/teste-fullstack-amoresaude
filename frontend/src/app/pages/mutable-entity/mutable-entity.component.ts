@@ -10,5 +10,4 @@ export class MutableEntityComponent implements OnInit {
 
   ngOnInit(): void {
   }
-
 }

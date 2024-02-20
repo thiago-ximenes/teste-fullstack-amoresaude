@@ -7,12 +7,10 @@ import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {NgxsModule} from "@ngxs/store";
 import {AuthState} from "./guards/auth/auth.state";
 import {HttpClientModule} from "@angular/common/http";
-import { MutableEntityComponent } from './pages/mutable-entity/mutable-entity.component';
 
 @NgModule({
   declarations: [
     AppComponent,
-    MutableEntityComponent,
   ],
   imports: [
     BrowserModule,

@@ -1,7 +1,7 @@
 <main class="grid grid-rows-2 p-6 items-end">
   <section class="grid grid-cols-2 gap-6 h-fit ">
     <h1 class="text-4xl font-bold text-center self-center">Entidades</h1>
-    <mat-button-toggle class="bg-indigo-300 md:w-1/3 mx-auto">
+    <mat-button-toggle (click)="navigateToNewEntity()" class="bg-indigo-300 md:w-1/3 mx-auto">
       Nova entidade
     </mat-button-toggle>
   </section>
@@ -39,11 +39,11 @@
           </ng-container>
           <ng-container matColumnDef="actions">
             <mat-header-cell *matHeaderCellDef> Ações</mat-header-cell>
-            <mat-cell *matCellDef>
-              <button mat-icon-button>
+            <mat-cell *matCellDef="let element">
+              <button mat-icon-button (click)="navigateToViewEntity(element.id)">
                 <mat-icon>visibility</mat-icon>
               </button>
-              <button mat-icon-button>
+              <button mat-icon-button (click)="navigateToEditEntity(element.id)">
                 <mat-icon>edit</mat-icon>
               </button>
             </mat-cell>
