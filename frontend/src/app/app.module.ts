@@ -10,11 +10,13 @@ import {ToastrModule} from "ngx-toastr";
 import { ErrorDialogComponent } from './component/error-dialog/error-dialog.component';
 import {MatButtonToggleModule} from "@angular/material/button-toggle";
 import {MatIconModule} from "@angular/material/icon";
+import { ListAttendSpecialtiesDialogComponent } from './component/list-attend-specialties-dialog/list-attend-specialties-dialog.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     ErrorDialogComponent,
+    ListAttendSpecialtiesDialogComponent,
   ],
   imports: [
     BrowserModule,

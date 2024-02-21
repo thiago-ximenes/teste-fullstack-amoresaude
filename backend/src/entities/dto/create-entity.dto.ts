@@ -1,5 +1,6 @@
 import {ApiProperty} from "@nestjs/swagger";
-import {IsArray, IsBoolean, IsDateString, IsDefined, IsNumber, IsString, Length} from "class-validator";
+import {ArrayMinSize, IsArray, IsBoolean, IsDateString, IsDefined, IsString, Length} from "class-validator";
+import {IsCNPJ} from "../../decorators/IsCNPJ";
 
 export class CreateEntityDto {
     @ApiProperty()
@@ -15,8 +16,9 @@ export class CreateEntityDto {
 
 
     @ApiProperty()
-    @Length(14, 14)
+    @IsDefined()
     @IsString()
+    @IsCNPJ()
     cnpj: string;
 
     @ApiProperty()
@@ -37,6 +39,7 @@ export class CreateEntityDto {
     @ApiProperty()
     @IsDefined()
     @IsArray()
+    @ArrayMinSize(5)
     @IsString({
         each: true
     })

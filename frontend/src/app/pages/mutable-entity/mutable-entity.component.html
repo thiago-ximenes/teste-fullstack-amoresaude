@@ -80,15 +80,16 @@
             <mat-option
               *ngFor="let specialty of attendedMedicalSpecialties"
               [value]="specialty.value"
-              [disabled]="isSelectionFull && !entityForm.value.attendedMedicalSpecialties.includes(specialty.value)"
-            >{{ specialty.label }}
+              [disabled]="!!(loading | async)"
+            >
+              {{ specialty.label }}
             </mat-option>
           </mat-select>
           <mat-error *ngIf="hasAttendedMedicalSpecialtiesRequiredError">
             Campo obrigatório
           </mat-error>
-          <mat-error *ngIf="hasAttendedMedicalSpecialtiesMaxLengthError">
-            Máximo de 5 especialidades
+          <mat-error *ngIf="hasAttendedMedicalSpecialtiesMinLengthError">
+            Minimo de 5 especialidades
           </mat-error>
         </mat-form-field>
       </div>
@@ -133,9 +134,9 @@
         </mat-button-toggle>
         <button
           mat-button-toggle
-                [disabled]="!!(loading | async)"
-                class="bg-blue-200 md:w-1/4 p-2 rounded-sm"
-                type="submit"
+          [disabled]="!!(loading | async)"
+          class="bg-blue-200 md:w-1/4 p-2 rounded-sm"
+          type="submit"
         >
           <span *ngIf="loading | async">Carregando...</span>
           <span *ngIf="!(loading | async)">{{ actionButtonLabel }}</span>

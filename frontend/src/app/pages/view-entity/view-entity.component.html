@@ -1,1 +1,56 @@
-<p>view-entity works!</p>
+<main class="p-6">
+  <section class="grid grid-cols-2">
+    <h1 class="text-3xl text-center font-bold ">Visualizar entidade</h1>
+    <mat-button-toggle
+      class="bg-blue-200 md:w-1/4 ml-auto"
+      (click)="navigateToEdit()"
+    >
+      editar
+    </mat-button-toggle>
+  </section>
+  <section class="grid grid-cols-1 md:grid-cols-3 gap-3">
+    <div>
+      <h2 class="text-2xl font-bold">Nome fantasia</h2>
+      <p class="text-lg">{{ tradeName }}</p>
+    </div>
+    <div>
+      <h2 class="text-2xl font-bold">Razão social</h2>
+      <p class="text-lg">{{ corporateName }}</p>
+    </div>
+    <div>
+      <h2 class="text-2xl font-bold">CNPJ</h2>
+      <p class="text-lg">{{ cnpj }}</p>
+    </div>
+    <div>
+      <h2 class="text-2xl font-bold">Especialidades</h2>
+      <p class="text-lg">{{ specialties }}
+        <span
+          class="cursor-pointer"
+          *ngIf="specialtiesPlusLength > 0"
+          (click)="openDialog()"
+        >
+          + {{ specialtiesPlusLength }}
+        </span>
+      </p>
+    </div>
+    <div>
+      <h2 class="text-2xl font-bold">RegionalRegional</h2>
+      <p class="text-lg">{{ regional }}</p>
+    </div>
+    <div>
+      <h2 class="text-2xl font-bold">Data inauguração</h2>
+      <p class="text-lg">{{ openingDate }}</p>
+    </div>
+    <div>
+      <h2 class="text-2xl font-bold">Activo</h2>
+      <p class="text-lg">{{ active }}</p>
+    </div>
+  </section>
+  <div class="flex justify-end">
+    <mat-button-toggle
+      (click)="backToHome()"
+    >
+      Voltar
+    </mat-button-toggle>
+  </div>
+</main>
