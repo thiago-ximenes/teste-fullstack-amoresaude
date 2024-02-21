@@ -23,21 +23,23 @@ export class Entity {
     @Column()
     tradeName: string;
 
-    @Column()
+    @Column({
+        unique: true
+    })
     cnpj: string;
 
     @ManyToOne(() => Regional, regional => regional)
     regional: Regional;
 
     @Column()
-    opening_date: Date;
+    openingDate: Date;
 
     @Column()
     active: boolean;
 
     @ManyToMany(() => AttendedMedicalSpecialties, attended_medical_specialties => attended_medical_specialties)
     @JoinTable()
-    attended_medical_specialties: AttendedMedicalSpecialties[];
+    attendedMedicalSpecialties: AttendedMedicalSpecialties[];
 
     @CreateDateColumn()
     createdAt: Date;

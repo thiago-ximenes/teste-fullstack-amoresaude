@@ -7,9 +7,9 @@ export default interface Entity {
   tradeName: string;
   cnpj: string;
   regional: Regional;
-  opening_date: Date;
+  openingDate: Date;
   active: boolean;
-  attended_medical_specialties: AttendedMedicalSpecialties[];
+  attendedMedicalSpecialties: AttendedMedicalSpecialties[];
   createdAt: Date;
   updatedAt: Date;
 }

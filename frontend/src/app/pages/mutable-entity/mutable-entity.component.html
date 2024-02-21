@@ -1,1 +1,146 @@
-<p>mutable-entity works!</p>
+<main class="p-6">
+  <section>
+    <div class="grid grid-cols-2 gap-6 p-4">
+      <h1 class="text-center">{{ title }}</h1>
+      <mat-button-toggle (click)="deleteEntity()" *ngIf="isEdit" class="bg-red-200 md:w-1/4 ml-auto">
+        excluir
+      </mat-button-toggle>
+    </div>
+  </section>
+  <section>
+    <form
+      class="grid gap-1"
+      [formGroup]="entityForm"
+      (ngSubmit)="onSubmit()"
+    >
+      <div class="md:grid md:grid-cols-3 gap-6">
+        <mat-form-field class="w-full" appearance="outline">
+          <mat-label>Razão social</mat-label>
+          <input
+            matInput
+            [disabled]="!!(loading | async)"
+            formControlName="corporateName"
+          />
+          <mat-error *ngIf="hasCorporateNameRequiredError">
+            Campo obrigatório
+          </mat-error>
+          <mat-error *ngIf="hasCorporateNameMaxLengthError">
+            Máximo de 10 caracteres
+          </mat-error>
+        </mat-form-field>
+        <mat-form-field class="w-full" appearance="outline">
+          <mat-label>Nome fantasia</mat-label>
+          <input
+            matInput
+            [disabled]="!!(loading | async)"
+            formControlName="tradeName"
+          />
+          <mat-error *ngIf="hasTradeNameRequiredError">
+            Campo obrigatório
+          </mat-error>
+        </mat-form-field>
+        <mat-form-field class="w-full" appearance="outline">
+          <mat-label>CNPJ</mat-label>
+          <input
+            matInput
+            [disabled]="!!(loading | async)"
+            formControlName="cnpj"
+          />
+          <mat-error *ngIf="hasCnpjRequiredError">
+            Campo obrigatório
+          </mat-error>
+          <mat-error *ngIf="!hasCnpjRequiredError && hasCnpjPatternError">
+            CNPJ inválido
+          </mat-error>
+        </mat-form-field>
+      </div>
+      <div class="md:grid md:grid-cols-2  md:gap-6">
+        <mat-form-field class="w-full" appearance="outline">
+          <mat-label>Regional</mat-label>
+          <mat-select
+            [disabled]="!!(loading | async)"
+            formControlName="regionalId"
+          >
+            <mat-option
+              *ngFor="let regional of regionals"
+              [value]="regional.value">{{ regional.label }}
+            </mat-option>
+          </mat-select>
+          <mat-error *ngIf="hasRegionalRequiredError">
+            Campo obrigatório
+          </mat-error>
+        </mat-form-field>
+        <mat-form-field class="w-full" appearance="outline">
+          <mat-label>Especialidades médicas atendidas</mat-label>
+          <mat-select
+            [disabled]="!!(loading | async)"
+            [multiple]="true"
+            formControlName="attendedMedicalSpecialties"
+          >
+            <mat-option
+              *ngFor="let specialty of attendedMedicalSpecialties"
+              [value]="specialty.value"
+              [disabled]="isSelectionFull && !entityForm.value.attendedMedicalSpecialties.includes(specialty.value)"
+            >{{ specialty.label }}
+            </mat-option>
+          </mat-select>
+          <mat-error *ngIf="hasAttendedMedicalSpecialtiesRequiredError">
+            Campo obrigatório
+          </mat-error>
+          <mat-error *ngIf="hasAttendedMedicalSpecialtiesMaxLengthError">
+            Máximo de 5 especialidades
+          </mat-error>
+        </mat-form-field>
+      </div>
+      <div class="md:flex md:justify-between">
+        <mat-form-field class="w-full md:w-1/2" appearance="outline">
+          <mat-label>Data inauguração</mat-label>
+          <input
+            matInput
+            [matDatepicker]="picker"
+            [disabled]="!!(loading | async)"
+            formControlName="openingDate"
+          />
+          <mat-datepicker-toggle
+            matSuffix
+            [for]="picker"
+            [disabled]="!!(loading | async)"
+          >
+          </mat-datepicker-toggle>
+          <mat-datepicker #picker></mat-datepicker>
+          <mat-error *ngIf="hasOpeningDateRequiredError">
+            Campo obrigatório
+          </mat-error>
+        </mat-form-field>
+        <div class="flex justify-end">
+          <mat-checkbox
+            class="md:mx-auto md:self-center pt-0 p-4"
+            color="primary"
+            [disabled]="!!(loading | async)"
+            formControlName="active"
+          >
+            Ativa
+          </mat-checkbox>
+        </div>
+      </div>
+
+      <div class="flex justify-end gap-6">
+        <mat-button-toggle
+          class="md:w-1/4"
+          (click)="getBackToHome()"
+        >
+          cancelar
+        </mat-button-toggle>
+        <button
+          mat-button-toggle
+                [disabled]="!!(loading | async)"
+                class="bg-blue-200 md:w-1/4 p-2 rounded-sm"
+                type="submit"
+        >
+          <span *ngIf="loading | async">Carregando...</span>
+          <span *ngIf="!(loading | async)">{{ actionButtonLabel }}</span>
+        </button>
+      </div>
+    </form>
+  </section>
+</main>

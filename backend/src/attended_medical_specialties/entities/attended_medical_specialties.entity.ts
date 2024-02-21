@@ -16,7 +16,7 @@ export class AttendedMedicalSpecialties {
     @Column()
     label: string;
 
-    @ManyToMany(() => Entity, entity => entity.attended_medical_specialties)
+    @ManyToMany(() => Entity, entity => entity.attendedMedicalSpecialties)
     entities: Entity[];
 
     @CreateDateColumn()

@@ -16,9 +16,9 @@ const ELEMENT_DATA: Entity[] = [
       createdAt: new Date(),
       updatedAt: new Date()
     },
-    opening_date: new Date(),
+    openingDate: new Date(),
     active: true,
-    attended_medical_specialties: [
+    attendedMedicalSpecialties: [
       {
         value: '1',
         label: 'Cardiologia',

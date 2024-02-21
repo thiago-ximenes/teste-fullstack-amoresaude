@@ -1,4 +1,4 @@
-import {Body, Controller, Delete, Get, Param, Patch, Post} from '@nestjs/common';
+import {Body, Controller, Delete, Get, HttpCode, HttpStatus, Param, Patch, Post} from '@nestjs/common';
 import {EntitiesService} from './entities.service';
 import {CreateEntityDto} from './dto/create-entity.dto';
 import {UpdateEntityDto} from './dto/update-entity.dto';
@@ -13,6 +13,7 @@ const routeName = 'entities'
 export class EntitiesController {
   constructor(private readonly entitiesService: EntitiesService) {}
 
+  @HttpCode(HttpStatus.CREATED)
   @Post()
   create(@Body() createEntityDto: CreateEntityDto) {
     return this.entitiesService.create(createEntityDto);
