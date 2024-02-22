@@ -1,4 +1,4 @@
-import {Module} from '@nestjs/common';
+import {forwardRef, Module} from '@nestjs/common';
 import {TypeOrmModule} from "@nestjs/typeorm";
 import {ConfigModule, ConfigService} from "@nestjs/config";
 import {AuthModule} from './auth/auth.module';
@@ -34,7 +34,7 @@ import authConstants from "./auth/auth.constants";
                 migrationsRun: true,
             }),
         }),
-        AuthModule,
+        forwardRef(() => AuthModule),
         UsersModule,
         EntitiesModule,
         RegionalsModule,
