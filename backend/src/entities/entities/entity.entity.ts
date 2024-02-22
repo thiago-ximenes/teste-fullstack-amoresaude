@@ -37,8 +37,18 @@ export class Entity {
     @Column()
     active: boolean;
 
-    @ManyToMany(() => AttendedMedicalSpecialties, attended_medical_specialties => attended_medical_specialties)
-    @JoinTable()
+    @ManyToMany(() => AttendedMedicalSpecialties, attendedMedicalSpecialties => attendedMedicalSpecialties,)
+    @JoinTable({
+        name: 'attendedMedicalSpecialtiesEntity',
+        joinColumn: {
+            name: 'entityId',
+            referencedColumnName: 'id'
+        },
+        inverseJoinColumn: {
+            name: 'attendedMedicalSpecialtiesId',
+            referencedColumnName: 'value'
+        }
+    })
     attendedMedicalSpecialties: AttendedMedicalSpecialties[];
 
     @CreateDateColumn()

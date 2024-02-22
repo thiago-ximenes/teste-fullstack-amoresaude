@@ -107,10 +107,6 @@ export class MutableEntityComponent implements OnInit {
   }
 
   onSubmit() {
-    this.entityForm = new FormGroup(this.controls,
-      {updateOn: 'change'}
-    )
-
     if (this.entityForm.valid) {
       this.loading.next(true)
       this.entityForm.get('cnpj')?.setValue(this.entityForm.get('cnpj')?.value.replace(/\D+/g, ''), {emitEvent: false})
@@ -127,6 +123,9 @@ export class MutableEntityComponent implements OnInit {
           }
         })
       } else {
+        this.entityForm = new FormGroup(this.controls,
+          {updateOn: 'change'}
+        )
         this.mutableEntityService.createEntity(this.entityForm.value).subscribe({
           next: (response: Entity) => {
             this.loading.next(false);

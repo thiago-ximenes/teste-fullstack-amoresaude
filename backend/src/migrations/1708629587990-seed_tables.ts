@@ -1,7 +1,8 @@
-import * as bcrypt from 'bcryptjs';
-import { MigrationInterface, QueryRunner,  } from "typeorm";
+import { MigrationInterface, QueryRunner } from "typeorm";
+import * as bcrypt from "bcryptjs";
 
-export class CreateSeedTable1708607298417 implements MigrationInterface {
+export class SeedTables1708629587990 implements MigrationInterface {
+
 
     public async up(queryRunner: QueryRunner): Promise<void> {
         const encryptedPassword = await bcrypt.hash('123123123', 10);
@@ -65,4 +66,6 @@ export class CreateSeedTable1708607298417 implements MigrationInterface {
 
     public async down(queryRunner: QueryRunner): Promise<void> {
     }
+
 }
+
