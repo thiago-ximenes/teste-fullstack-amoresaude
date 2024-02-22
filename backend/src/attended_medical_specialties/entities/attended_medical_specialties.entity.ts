@@ -1,7 +1,7 @@
 import {
     Column,
     CreateDateColumn,
-    Entity as EntityORM,
+    Entity as EntityORM, JoinTable,
     ManyToMany,
     PrimaryGeneratedColumn,
     UpdateDateColumn
@@ -17,6 +17,17 @@ export class AttendedMedicalSpecialties {
     label: string;
 
     @ManyToMany(() => Entity, entity => entity.attendedMedicalSpecialties)
+    @JoinTable({
+        name: 'attendedMedicalSpecialtiesEntity',
+        joinColumn: {
+            name: 'attendedMedicalSpecialtiesId',
+            referencedColumnName: 'value'
+        },
+        inverseJoinColumn: {
+            name: 'entityId',
+            referencedColumnName: 'id'
+        }
+    })
     entities: Entity[];
 
     @CreateDateColumn()

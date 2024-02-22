@@ -1,7 +1,7 @@
 import {Injectable} from '@nestjs/common';
 import {CreateEntityDto} from './dto/create-entity.dto';
 import {UpdateEntityDto} from './dto/update-entity.dto';
-import {In, Not, Repository} from "typeorm";
+import {FindManyOptions, In, IsNull, Like, Not, Repository} from "typeorm";
 import {Entity} from "./entities/entity.entity";
 import {InjectRepository} from "@nestjs/typeorm";
 import {Regional} from "../regionals/entities/regional.entity";
@@ -30,20 +30,26 @@ export class EntitiesService {
     async findAll(searchEntityDto?: SearchEntityDto) {
         const {search, page} = searchEntityDto || {}
 
-        const take =  10;
+        const take = 10;
+
+        const attendedMedicalSpecialties = await this.attendedMedicalSpecialtiesRepository.find({
+            where: search ? {
+                label: Like(`%${search}%`),
+                entities: {
+                    id: Not(IsNull())
+                }
+            } : undefined,
+            relations: ['entities']
+        } as FindManyOptions<AttendedMedicalSpecialties>)
 
         const [entities, length] = await this.entitiesRepository.findAndCount({
             relations: ['regional', 'attendedMedicalSpecialties'],
             skip: page ? +page * take : undefined,
             take,
             where: search ? [
-                {corporateName: search},
-                {tradeName: search},
-                {
-                    attendedMedicalSpecialties: {
-                        label: search
-                    }
-                }
+                {corporateName: Like(`%${search}%`)},
+                {tradeName: Like(`%${search}%`)},
+                {id: In(attendedMedicalSpecialties.map(specialty => specialty.entities.map(entity => entity.id)).flat())}
             ] : undefined
         })
 
