@@ -10,11 +10,10 @@ import {MatInputModule} from "@angular/material/input";
 import {MatIconModule} from "@angular/material/icon";
 import {FormsModule} from "@angular/forms";
 import {MatButtonModule} from "@angular/material/button";
-import {MatPaginatorModule} from "@angular/material/paginator";
-import {HttpClientModule} from "@angular/common/http";
+import {MatPaginatorIntl, MatPaginatorModule} from "@angular/material/paginator";
 import {HomeService} from "./home.service";
-import { MatPaginatorIntl } from '@angular/material/paginator';
 import {MatProgressSpinnerModule} from "@angular/material/progress-spinner";
+import {MatSortModule} from "@angular/material/sort";
 
 const paginatorIntl = new MatPaginatorIntl();
 
@@ -47,12 +46,13 @@ paginatorIntl.getRangeLabel = (page: number, pageSize: number, length: number) =
     FormsModule,
     MatButtonModule,
     MatPaginatorModule,
-    HttpClientModule,
     MatProgressSpinnerModule,
+    MatSortModule,
   ],
   providers: [HomeService, {
     provide: MatPaginatorIntl, useValue: paginatorIntl
-  }],
+  },
+  ],
 })
 export class HomeModule {
 }

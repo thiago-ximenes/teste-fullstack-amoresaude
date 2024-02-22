@@ -16,6 +16,7 @@ export class AuthService {
 
   loginUrl = `${environment.apiUrl}/auth/login`;
   userUrl = `${environment.apiUrl}/auth/me`;
+  refreshTokenUrl = `${environment.apiUrl}/token/refresh`;
 
   constructor(
     private readonly http: HttpClient
@@ -24,9 +25,6 @@ export class AuthService {
 
   login(credentials: { email: string, password: string }) {
     return this.http.post<LoginResponse>(this.loginUrl, credentials, {
-      headers: {
-        'Content-Type': 'application/json',
-      }
     }).pipe(
       tap((response: LoginResponse) => {
         localStorage.setItem('access_token', response.access_token);
@@ -34,14 +32,22 @@ export class AuthService {
     );
   }
 
-  me(token: string) {
+  me() {
     return this.http.get<User>(this.userUrl, {
-      headers: {
-        'Authorization': `Bearer ${token}`
-      }
     }).pipe(
       map((response: User) => {
         return response;
+      })
+    );
+  }
+
+  refreshToken() {
+    const refreshToken = localStorage.getItem('access_token');
+    return this.http.put<LoginResponse>(this.refreshTokenUrl, {
+      lastToken: refreshToken
+    }).pipe(
+      tap((response: LoginResponse) => {
+        localStorage.setItem('access_token', response.access_token);
       })
     );
   }

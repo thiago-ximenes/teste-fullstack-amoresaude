@@ -1,5 +1,5 @@
 import {State, Action, StateContext, Selector} from '@ngxs/store';
-import {CheckToken} from './auth.actions';
+import {CheckToken, UpdateToken} from './auth.actions';
 import {AuthService} from './auth.service';
 import {tap} from 'rxjs/operators';
 import {catchError, map, of} from "rxjs";
@@ -16,7 +16,7 @@ export class AuthStateModel {
 @State<AuthStateModel>({
   name: 'auth',
   defaults: {
-    token: null,
+    token: localStorage.getItem('access_token') || null,
     user: null
   }
 })
@@ -42,12 +42,18 @@ export class AuthState {
       return of(false);
     }
 
-    return this.authService.me(token).pipe(
+    return this.authService.me().pipe(
       tap((user) => {
         ctx.patchState({token, user});
       }),
       map(() => true),
       catchError(() => of(false))
     );
+  }
+
+  @Action(UpdateToken)
+  updateToken(ctx: StateContext<AuthStateModel>, {token}: UpdateToken) {
+    ctx.patchState({token});
+    localStorage.setItem('access_token', token);
   }
 }

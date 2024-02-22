@@ -18,9 +18,17 @@
         <div class="absolute left-1/2 top-1/2 z-50">
           <mat-spinner *ngIf="loading"></mat-spinner>
         </div>
-        <table mat-table [dataSource]="dataSource" class="w-full">
+        <table
+          mat-table
+          [dataSource]="dataSource"
+          class="w-full"
+          matSort
+          matSortActive="nome"
+          matSortDisableClear
+          matSortDirection="desc"
+        >
           <ng-container matColumnDef="nome">
-            <mat-header-cell *matHeaderCellDef> Nome</mat-header-cell>
+            <mat-header-cell *matHeaderCellDef mat-sort-header> Nome</mat-header-cell>
             <mat-cell *matCellDef="let element"> {{ element.tradeName }}</mat-cell>
           </ng-container>
 

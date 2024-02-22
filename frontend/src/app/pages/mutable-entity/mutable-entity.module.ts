@@ -8,7 +8,6 @@ import {MatDatepickerModule} from "@angular/material/datepicker";
 import {MatNativeDateModule} from "@angular/material/core";
 import {MatCheckboxModule} from "@angular/material/checkbox";
 import {MatSelectModule} from "@angular/material/select";
-import {HttpClientModule} from "@angular/common/http";
 import {MutableEntityService} from "./mutable-entity.service";
 import {ReactiveFormsModule} from "@angular/forms";
 import {MatDialogModule} from "@angular/material/dialog";
@@ -26,7 +25,6 @@ import {MatDialogModule} from "@angular/material/dialog";
     MatNativeDateModule,
     MatCheckboxModule,
     MatSelectModule,
-    HttpClientModule,
     ReactiveFormsModule,
     MatDialogModule,
   ],
