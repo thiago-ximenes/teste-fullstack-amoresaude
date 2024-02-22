@@ -7,6 +7,7 @@ import {InjectRepository} from "@nestjs/typeorm";
 import {Regional} from "../regionals/entities/regional.entity";
 import {AttendedMedicalSpecialties} from "../attended_medical_specialties/entities/attended_medical_specialties.entity";
 import {EntitiesExceptions} from "./entities.exceptions";
+import {SearchEntityDto} from "./dto/search-entity.dto";
 
 @Injectable()
 export class EntitiesService {
@@ -26,8 +27,31 @@ export class EntitiesService {
         return this.saveEntity(entity, createEntityDto)
     }
 
-    findAll() {
-        return this.entitiesRepository.find()
+    async findAll(searchEntityDto?: SearchEntityDto) {
+        const {search, page} = searchEntityDto || {}
+
+        const take =  10;
+
+        const [entities, length] = await this.entitiesRepository.findAndCount({
+            relations: ['regional', 'attendedMedicalSpecialties'],
+            skip: page ? +page * take : undefined,
+            take,
+            where: search ? [
+                {corporateName: search},
+                {tradeName: search},
+                {
+                    attendedMedicalSpecialties: {
+                        label: search
+                    }
+                }
+            ] : undefined
+        })
+
+        return {
+            entities,
+            length,
+            page: page ? +page : 0,
+        }
     }
 
     findOne(id: number) {

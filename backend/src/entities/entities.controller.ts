@@ -1,8 +1,9 @@
-import {Body, Controller, Delete, Get, HttpCode, HttpStatus, Param, Patch, Post} from '@nestjs/common';
+import {Body, Controller, Delete, Get, HttpCode, HttpStatus, Param, Patch, Post, Query} from '@nestjs/common';
 import {EntitiesService} from './entities.service';
 import {CreateEntityDto} from './dto/create-entity.dto';
 import {UpdateEntityDto} from './dto/update-entity.dto';
 import {ApiBearerAuth, ApiTags} from "@nestjs/swagger";
+import {SearchEntityDto} from "./dto/search-entity.dto";
 
 const routeName = 'entities'
 
@@ -20,8 +21,8 @@ export class EntitiesController {
   }
 
   @Get()
-  findAll() {
-    return this.entitiesService.findAll();
+  findAll(@Query() searchEntityDto?: SearchEntityDto) {
+    return this.entitiesService.findAll(searchEntityDto);
   }
 
   @Get(':id')

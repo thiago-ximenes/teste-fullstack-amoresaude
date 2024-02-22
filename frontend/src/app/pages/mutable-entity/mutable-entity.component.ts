@@ -3,7 +3,7 @@ import {MutableEntityService} from "./mutable-entity.service";
 import Regional from "../../../interfaces/regional.interface";
 import AttendedMedicalSpecialties from "../../../interfaces/attended_medical_specialties.interface";
 import {BehaviorSubject} from "rxjs";
-import {AbstractControl, FormControl, FormGroup, ValidationErrors, ValidatorFn, Validators} from "@angular/forms";
+import {AbstractControl, FormControl, FormGroup, Validators} from "@angular/forms";
 import {ActivatedRoute, Router} from "@angular/router";
 import {ToastrService} from "ngx-toastr";
 import Entity from "../../../interfaces/entity.interface";
@@ -12,6 +12,7 @@ import {ErrorDialogComponent} from "../../component/error-dialog/error-dialog.co
 import DialogData from "../../../interfaces/dialog-data.interface";
 import {HttpErrorResponse} from "@angular/common/http";
 import {validateCNPJ} from "../../validators/cnpj.validator";
+import {Location} from "@angular/common";
 
 @Component({
   selector: 'app-mutable-entity',
@@ -36,7 +37,8 @@ export class MutableEntityComponent implements OnInit {
     private readonly router: Router,
     private readonly toastr: ToastrService,
     private readonly dialog: MatDialog,
-    private readonly activatedRoute: ActivatedRoute
+    private readonly activatedRoute: ActivatedRoute,
+    private readonly location: Location,
   ) {
 
     this.entityForm = new FormGroup({})
@@ -100,8 +102,8 @@ export class MutableEntityComponent implements OnInit {
     }
   }
 
-  getBackToHome() {
-    this.router.navigate(['/home'])
+  back() {
+    this.location.back()
   }
 
   onSubmit() {
@@ -189,7 +191,15 @@ export class MutableEntityComponent implements OnInit {
     this.mutableEntityService.getEntity(id).subscribe((entity: Entity) => {
       const mappedAttendedMedicalSpecialties = entity.attendedMedicalSpecialties.map((specialty) => specialty.value)
 
-      this.entityForm = new FormGroup(this.controls,
+      this.entityForm = new FormGroup({
+          corporateName: new FormControl(entity.corporateName, [Validators.required, Validators.maxLength(10)]),
+          tradeName: new FormControl(entity.tradeName, [Validators.required]),
+          cnpj: new FormControl(entity.cnpj, [Validators.required, validateCNPJ()]),
+          regionalId: new FormControl(entity.regional.value, [Validators.required]),
+          attendedMedicalSpecialties: new FormControl(mappedAttendedMedicalSpecialties, [Validators.required, Validators.minLength(5)]),
+          openingDate: new FormControl(entity.openingDate, [Validators.required]),
+          active: new FormControl(entity.active, [Validators.required]),
+        },
         {updateOn: 'submit'}
       )
     })

@@ -8,6 +8,7 @@ import {
   ListAttendSpecialtiesDialogComponent
 } from "../../component/list-attend-specialties-dialog/list-attend-specialties-dialog.component";
 import * as moment from "moment";
+import {Location} from "@angular/common";
 
 @Component({
   selector: 'app-view-entity',
@@ -23,6 +24,7 @@ export class ViewEntityComponent implements OnInit {
     private readonly router: Router,
     private readonly activatedRoute: ActivatedRoute,
     private readonly dialog: MatDialog,
+    private readonly location: Location
   ) {
   }
 
@@ -92,7 +94,7 @@ export class ViewEntityComponent implements OnInit {
     });
   }
 
-  backToHome(): void {
-    this.router.navigate(['/home']);
+  back(): void {
+    this.location.back();
   }
 }
